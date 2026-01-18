@@ -1,0 +1,8 @@
+{
+  "name": "Digital BR Tecnologia",
+  "description": "Sophisticated institutional one-page website for Digital BR Tecnologia, featuring portfolio, pricing, and company information.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
