@@ -1,12 +1,12 @@
 
 import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Portfolio from './components/Portfolio';
-import Pricing from './components/Pricing';
-import About from './components/About';
-import Footer from './components/Footer';
-import FloatingButton from './components/FloatingButton';
+import Header from './components/Header.tsx';
+import Hero from './components/Hero.tsx';
+import Portfolio from './components/Portfolio.tsx';
+import Pricing from './components/Pricing.tsx';
+import About from './components/About.tsx';
+import Footer from './components/Footer.tsx';
+import FloatingButton from './components/FloatingButton.tsx';
 
 const App: React.FC = () => {
   return (
