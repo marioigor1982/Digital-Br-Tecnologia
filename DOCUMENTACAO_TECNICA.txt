@@ -1,0 +1,62 @@
+================================================================================
+DIGITAL BR TECNOLOGIA - DOCUMENTAÇÃO TÉCNICA DO SISTEMA
+================================================================================
+
+1. VISÃO GERAL
+--------------
+O projeto consiste em um site institucional One-Page sofisticado, desenvolvido 
+para a empresa "Digital BR Tecnologia". O foco principal é a conversão de leads 
+através de um design moderno, limpo e altamente responsivo.
+
+2. ARQUITETURA E TECNOLOGIAS
+----------------------------
+- Framework: React 19 (importado via ESM módulos).
+- Estilização: Tailwind CSS (Configuração customizada via CDN).
+- Linguagem: TypeScript.
+- Resolução de Módulos: Import Maps (nativo do browser).
+- Deploy: Otimizado para Vercel / GitHub.
+
+3. IDENTIDADE VISUAL (SISTEMA DE DESIGN)
+----------------------------------------
+- Paleta de Cores:
+  * Background: #F2F2F2 (Cinza Neutro)
+  * Primária: #074073 (Azul Marinho Corporativo)
+  * Secundária: #069DBF (Ciano Digital)
+  * Destaques: #56A632 e #7FBF1F (Verdes para CTA e Sucesso)
+- Tipografia:
+  * Títulos e Destaques: Poppins (Moderna, Geométrica)
+  * Corpo de Texto: Montserrat (Alta legibilidade)
+
+4. ESTRUTURA DE COMPONENTES
+---------------------------
+- Header.tsx: Menu fixo (sticky) com efeito backdrop-blur e transparência 
+  dinâmica que muda ao rolar a página. Inclui links de navegação suave.
+- Hero.tsx: Seção de impacto inicial com imagem de fundo fixa (parallax-like) 
+  e CTAs claros para "Trabalhos" e "Planos".
+- Portfolio.tsx: Galeria dinâmica com filtragem por categorias (Barbearias, 
+  Comércio Local, Serviços). Utiliza estados do React para transições de grid.
+- Pricing.tsx: Três níveis de planos (Básico, PLUS, DIAMANTE). O plano PLUS 
+  possui destaque visual por ser o "Mais Popular".
+- About.tsx (Quem Somos): Integração de vídeo institucional no formato 16:9 
+  utilizando a tag <video> nativa do HTML5 para melhor performance e controle.
+- Footer.tsx: Rodapé com gradiente personalizado e informações de contato.
+- FloatingButton.tsx: Botão flutuante fixo para contato via Telegram.
+
+5. ESPECIFICAÇÕES DE MÍDIA
+--------------------------
+- Vídeo Institucional: Hospedado no ImageKit (URL: ik.imagekit.io). 
+  Configurado sem autoplay para respeitar a largura de banda do usuário.
+- Imagens: Carregamento otimizado (lazy loading) e hospedagem via Postimg/Picsum.
+- Logo: Identidade visual circular com borda da cor primária.
+
+6. CONFIGURAÇÕES DE DEPLOY E AMBIENTE
+-------------------------------------
+- O arquivo index.html utiliza um Import Map para carregar React/ReactDOM 
+  diretamente de CDNs (esm.sh), eliminando a necessidade de um build step pesado.
+- As extensões de arquivo (.tsx) são obrigatórias nas importações para 
+  compatibilidade com o sistema de módulos nativo do navegador em ambiente Vercel.
+
+================================================================================
+Última Atualização: Junho de 2024
+Responsável: Senior Frontend Engineer
+================================================================================
