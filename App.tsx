@@ -6,11 +6,11 @@ import Portfolio from './components/Portfolio.tsx';
 import Pricing from './components/Pricing.tsx';
 import About from './components/About.tsx';
 import Footer from './components/Footer.tsx';
-import FloatingButton from './components/FloatingButton.tsx';
+import ChatBox from './components/ChatBox.tsx';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col font-sans">
+    <div className="min-h-screen flex flex-col font-sans bg-background selection:bg-secondary/30">
       <Header />
       <main className="flex-grow">
         <section id="inicio">
@@ -27,7 +27,7 @@ const App: React.FC = () => {
         </section>
       </main>
       <Footer />
-      <FloatingButton />
+      <ChatBox />
     </div>
   );
 };
