@@ -18,8 +18,8 @@ const ChatBox: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const DEVLYN_AVATAR = "https://i.postimg.cc/Ss2pKkrG/IA-Devlyn.png";
-  const LOGO_ICON = "https://i.postimg.cc/gjMb3xX1/Digital-BR-Tecnologia.png";
+  // Imagem da Devlyn focada no rosto
+  const DEVLYN_AVATAR = "https://i.postimg.cc/hQ9T26WW/IA-Devlyn-BKG-Transparent-Face.png";
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -72,14 +72,15 @@ const ChatBox: React.FC = () => {
           className="group relative flex items-center justify-center"
         >
           <div className="absolute -inset-2 bg-gradient-to-r from-primary via-secondary to-accentGreen2 rounded-full animate-spin-slow opacity-75 blur-md group-hover:opacity-100 transition-opacity"></div>
-          <div className="relative bg-white p-1 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center overflow-hidden border-4 border-white w-20 h-20">
+          <div className="relative bg-white rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center overflow-hidden border-4 border-white w-20 h-20">
+            <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-gray-200"></div>
             <img 
               src={DEVLYN_AVATAR} 
               alt="Devlyn AI" 
-              className="w-full h-full object-cover scale-110 translate-y-1"
+              className="relative w-full h-full object-cover scale-125 translate-y-1"
             />
           </div>
-          <div className="absolute -top-2 -right-2 bg-accentGreen2 w-6 h-6 rounded-full border-4 border-white animate-pulse"></div>
+          <div className="absolute -top-1 -right-1 bg-accentGreen2 w-6 h-6 rounded-full border-4 border-white animate-pulse"></div>
         </button>
       )}
 
@@ -89,22 +90,23 @@ const ChatBox: React.FC = () => {
           {/* Header Estilo Digital BR */}
           <div className="bg-primary p-5 flex items-center justify-between text-white relative">
             <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/20 rounded-full -mr-16 -mt-16 blur-3xl"></div>
-            <div className="flex items-center gap-4 relative z-10">
-              <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-secondary bg-white shadow-lg">
-                <img src={DEVLYN_AVATAR} alt="Devlyn AI" className="w-full h-full object-cover scale-125 translate-y-2" />
+            <div className="flex items-center gap-4 relative z-10 w-full">
+              {/* Avatar Circular 50% - Corrigido Layout */}
+              <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-secondary bg-white shadow-lg flex-shrink-0 flex items-center justify-center">
+                <img src={DEVLYN_AVATAR} alt="Devlyn AI" className="w-full h-full object-cover scale-150 translate-y-1" />
               </div>
-              <div>
+              <div className="flex-grow">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-bold text-xl leading-tight">Devlyn</h3>
-                  <div className="w-2 h-2 bg-accentGreen2 rounded-full animate-pulse"></div>
+                  <h3 className="font-bold text-lg leading-tight">Devlyn</h3>
+                  <div className="w-2.5 h-2.5 bg-accentGreen2 rounded-full animate-pulse border-2 border-primary/20"></div>
                 </div>
-                <p className="text-secondary text-xs font-bold tracking-widest uppercase">Inteligência Artificial</p>
-                <p className="text-white/60 text-[10px] mt-1">Digital BR Tecnologia</p>
+                <p className="text-secondary text-[10px] font-bold tracking-widest uppercase mb-0.5">Inteligência Artificial</p>
+                <p className="text-white/60 text-[10px] leading-none">Digital BR Tecnologia</p>
               </div>
             </div>
             <button 
               onClick={() => setIsOpen(false)} 
-              className="hover:bg-white/10 p-2 rounded-full transition-colors relative z-10"
+              className="hover:bg-white/10 p-2 rounded-full transition-colors relative z-10 flex-shrink-0"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
@@ -115,25 +117,32 @@ const ChatBox: React.FC = () => {
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
                 {m.role === 'ai' && (
-                  <div className="w-8 h-8 rounded-full overflow-hidden border border-primary/20 mr-2 mt-auto flex-shrink-0">
-                    <img src={DEVLYN_AVATAR} alt="Dev" className="w-full h-full object-cover scale-150 translate-y-1" />
+                  <div className="w-9 h-9 rounded-full overflow-hidden border border-primary/10 mr-2 mt-auto flex-shrink-0 bg-white flex items-center justify-center">
+                    <img src={DEVLYN_AVATAR} alt="Dev" className="w-full h-full object-cover scale-[1.8] translate-y-1" />
                   </div>
                 )}
-                <div className={`max-w-[80%] p-4 rounded-3xl text-sm shadow-sm leading-relaxed ${
-                  m.role === 'user' 
-                  ? 'bg-gradient-to-br from-primary to-secondary text-white rounded-br-none' 
-                  : 'bg-white text-gray-800 border border-gray-100 rounded-bl-none font-medium'
-                }`}>
-                  {m.text}
-                </div>
+                
+                {m.role === 'ai' ? (
+                  /* Mensagem da IA: Azul mesclado com verde + transparência */
+                  <div className="max-w-[85%] p-4 rounded-3xl text-sm shadow-md leading-relaxed bg-gradient-to-br from-primary/90 via-secondary/90 to-accentGreen1/85 backdrop-blur-sm text-white rounded-bl-none font-medium border border-white/10">
+                    {m.text}
+                  </div>
+                ) : (
+                  /* Mensagem do Usuário: Fundo Gelo com degradê branco + borda mesclada verde/azul */
+                  <div className="max-w-[85%] p-[2px] rounded-3xl bg-gradient-to-r from-secondary to-accentGreen1 shadow-sm rounded-br-none">
+                    <div className="bg-gradient-to-br from-[#F0F4F8] to-white text-primary p-4 rounded-[calc(1.5rem-2px)] rounded-br-none text-sm leading-relaxed font-semibold">
+                      {m.text}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-white p-4 rounded-3xl border border-gray-100 rounded-bl-none flex gap-1.5 shadow-sm">
-                  <span className="w-2 h-2 bg-secondary/40 rounded-full animate-bounce"></span>
-                  <span className="w-2 h-2 bg-secondary/60 rounded-full animate-bounce delay-150"></span>
-                  <span className="w-2 h-2 bg-secondary/80 rounded-full animate-bounce delay-300"></span>
+                <div className="bg-gradient-to-r from-primary/80 to-secondary/80 p-4 rounded-3xl border border-white/10 rounded-bl-none flex gap-1.5 shadow-sm backdrop-blur-sm">
+                  <span className="w-2 h-2 bg-white/40 rounded-full animate-bounce"></span>
+                  <span className="w-2 h-2 bg-white/60 rounded-full animate-bounce delay-150"></span>
+                  <span className="w-2 h-2 bg-white/80 rounded-full animate-bounce delay-300"></span>
                 </div>
               </div>
             )}
