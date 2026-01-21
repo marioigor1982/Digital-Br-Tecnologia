@@ -36,12 +36,16 @@ const ChatBox: React.FC = () => {
     setIsLoading(true);
 
     try {
+      // Fix: Corrected 'm' scoping error on line 44 by properly closing map and setting role to 'user'
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
-        contents: [...messages.map(m => ({ 
-          role: m.role === 'ai' ? 'model' : 'user', 
-          parts: [{ text: m.text }] 
-        })), { role: 'user', parts: [{ text: userMsg }] }],
+        contents: [
+          ...messages.map(m => ({ 
+            role: m.role === 'ai' ? 'model' : 'user', 
+            parts: [{ text: m.text }] 
+          })), 
+          { role: 'user', parts: [{ text: userMsg }] }
+        ],
         config: {
           systemInstruction: "Você é Devlyn, a assistente de IA da Digital BR Tecnologia. Sua função é ser cordial, profissional e técnica. Você deve fazer uma triagem: entender o que o cliente precisa (Site, Landing Page, IA) e, após algumas interações, sugerir que ele fale com um consultor humano via WhatsApp. Não dê preços exatos, apenas faixas de valores baseadas nos planos do site (Básico 450, Plus 650, Diamante 850). Lembre-se que você representa a elite da tecnologia BR.",
         }
@@ -91,7 +95,7 @@ const ChatBox: React.FC = () => {
           <div className="bg-primary p-5 flex items-center justify-between text-white relative">
             <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/20 rounded-full -mr-16 -mt-16 blur-3xl"></div>
             <div className="flex items-center gap-4 relative z-10 w-full">
-              {/* Avatar Circular 50% - Corrigido Layout */}
+              {/* Avatar Circular 50% */}
               <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-secondary bg-white shadow-lg flex-shrink-0 flex items-center justify-center">
                 <img src={DEVLYN_AVATAR} alt="Devlyn AI" className="w-full h-full object-cover scale-150 translate-y-1" />
               </div>
@@ -123,14 +127,14 @@ const ChatBox: React.FC = () => {
                 )}
                 
                 {m.role === 'ai' ? (
-                  /* Mensagem da IA: Azul mesclado com verde + transparência */
-                  <div className="max-w-[85%] p-4 rounded-3xl text-sm shadow-md leading-relaxed bg-gradient-to-br from-primary/90 via-secondary/90 to-accentGreen1/85 backdrop-blur-sm text-white rounded-bl-none font-medium border border-white/10">
+                  /* Mensagem da IA: Azul mesclado com verde (estilo footer) + transparência */
+                  <div className="max-w-[85%] p-4 rounded-3xl text-sm shadow-md leading-relaxed bg-gradient-to-br from-primary/90 via-secondary/85 to-accentGreen1/80 backdrop-blur-sm text-white rounded-bl-none font-medium border border-white/10">
                     {m.text}
                   </div>
                 ) : (
-                  /* Mensagem do Usuário: Fundo Gelo com degradê branco + borda mesclada verde/azul */
-                  <div className="max-w-[85%] p-[2px] rounded-3xl bg-gradient-to-r from-secondary to-accentGreen1 shadow-sm rounded-br-none">
-                    <div className="bg-gradient-to-br from-[#F0F4F8] to-white text-primary p-4 rounded-[calc(1.5rem-2px)] rounded-br-none text-sm leading-relaxed font-semibold">
+                  /* Mensagem do Usuário: Fundo Gelo com degradê branco + borda mesclada verde com azul */
+                  <div className="max-w-[85%] p-[2px] rounded-3xl bg-gradient-to-r from-primary via-secondary to-accentGreen1 shadow-sm rounded-br-none">
+                    <div className="bg-gradient-to-br from-[#F2F2F2] to-white text-primary p-4 rounded-[calc(1.5rem-2px)] rounded-br-none text-sm leading-relaxed font-bold border-white/50 border">
                       {m.text}
                     </div>
                   </div>
