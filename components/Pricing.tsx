@@ -42,61 +42,61 @@ const plans: PricingPlan[] = [
 
 const Pricing: React.FC = () => {
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
+    <section className="py-16 md:py-24 bg-[#F8FAFC]">
+      <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Escolha seu Plano</h2>
-          <div className="w-20 h-1 bg-secondary mx-auto mb-6"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">Escolha seu Plano</h2>
+          <div className="w-24 h-1.5 bg-secondary mx-auto mb-8 rounded-full"></div>
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Soluções que cabem no seu bolso e elevam o nível do seu negócio.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {plans.map((plan) => (
             <div 
               key={plan.name}
-              className={`relative flex flex-col p-8 rounded-3xl transition-all hover:shadow-2xl ${
+              className={`relative flex flex-col p-10 rounded-[2.5rem] transition-all hover:shadow-2xl duration-500 ${
                 plan.isPopular 
-                ? 'bg-primary text-white scale-105 z-10 shadow-xl border-4 border-secondary' 
-                : 'bg-background text-primary border border-gray-200'
+                ? 'bg-primary text-white scale-105 z-10 shadow-2xl border-4 border-secondary' 
+                : 'bg-white text-primary border border-gray-100 shadow-sm'
               }`}
             >
               {plan.isPopular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accentGreen1 text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-accentGreen1 text-white text-xs font-black px-6 py-2 rounded-full uppercase tracking-widest shadow-lg">
                   Mais Popular
                 </div>
               )}
               
-              <h3 className={`text-2xl font-bold mb-4 ${plan.isPopular ? 'text-secondary' : 'text-primary'}`}>
+              <h3 className={`text-2xl font-black mb-4 uppercase tracking-tight ${plan.isPopular ? 'text-secondary' : 'text-primary'}`}>
                 {plan.name}
               </h3>
               
-              <div className="mb-6">
-                <span className="text-4xl font-bold">{plan.price}</span>
-                <p className={`text-sm mt-1 opacity-80 ${plan.isPopular ? 'text-gray-200' : 'text-gray-600'}`}>
+              <div className="mb-8">
+                <span className="text-4xl font-black">{plan.price}</span>
+                <p className={`text-sm mt-2 font-bold opacity-80 ${plan.isPopular ? 'text-gray-200' : 'text-gray-500'}`}>
                   Manutenção: {plan.maintenance}
                 </p>
               </div>
 
-              <ul className="space-y-4 mb-8 flex-grow">
+              <ul className="space-y-5 mb-10 flex-grow">
                 {plan.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <svg className={`flex-shrink-0 w-5 h-5 ${plan.isPopular ? 'text-secondary' : 'text-accentGreen1'}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <li key={idx} className="flex items-start gap-4">
+                    <svg className={`flex-shrink-0 w-6 h-6 ${plan.isPopular ? 'text-secondary' : 'text-accentGreen1'}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-sm font-medium">{feature}</span>
+                    <span className="text-base font-semibold leading-snug">{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              <div className={`mt-auto pt-6 border-t ${plan.isPopular ? 'border-white/20' : 'border-gray-200'}`}>
-                <p className="text-xs font-bold mb-2">
-                  Destaque: Opção R$ {plan.customDomainPrice} + R$ {plan.customDomainMaint}/mês para domínio próprio.
+              <div className={`mt-auto pt-8 border-t ${plan.isPopular ? 'border-white/10' : 'border-gray-100'}`}>
+                <p className="text-[10px] font-bold mb-4 uppercase tracking-widest opacity-70">
+                  Opcional Domínio Próprio: R$ {plan.customDomainPrice} + R$ {plan.customDomainMaint}/mês
                 </p>
-                <button className={`w-full py-3 rounded-xl font-bold transition-all ${
+                <button className={`w-full py-4 rounded-2xl font-black text-sm uppercase tracking-widest transition-all ${
                   plan.isPopular 
-                  ? 'bg-secondary hover:bg-white hover:text-primary text-white' 
+                  ? 'bg-secondary hover:bg-white hover:text-primary text-white shadow-lg' 
                   : 'bg-primary hover:bg-secondary text-white'
                 }`}>
                   Contratar Agora

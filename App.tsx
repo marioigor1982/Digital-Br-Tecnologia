@@ -18,6 +18,31 @@ const ScrollToTop = () => {
   return null;
 };
 
+// Página Inicial que compõe todas as seções (Experiência One-Page)
+const HomePage: React.FC = () => {
+  return (
+    <>
+      <Hero />
+      <div id="portfolio-section">
+        <Portfolio />
+      </div>
+      <div id="pricing-section">
+        <Pricing />
+      </div>
+      <div id="about-section">
+        <About />
+      </div>
+    </>
+  );
+};
+
+// Wrapper para as páginas individuais para garantir que o conteúdo não fique sob o header fixo
+const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className="pt-20">
+    {children}
+  </div>
+);
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -26,12 +51,16 @@ const App: React.FC = () => {
         <Header />
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<Hero />} />
-            <Route path="/trabalhos" element={<Portfolio />} />
-            <Route path="/precos" element={<Pricing />} />
-            <Route path="/quem-somos" element={<About />} />
-            {/* Fallback para home em caso de rota inexistente */}
-            <Route path="*" element={<Hero />} />
+            {/* Home exibe TUDO */}
+            <Route path="/" element={<HomePage />} />
+            
+            {/* Rotas individuais exibem apenas a seção com espaçamento correto */}
+            <Route path="/trabalhos" element={<PageWrapper><Portfolio /></PageWrapper>} />
+            <Route path="/precos" element={<PageWrapper><Pricing /></PageWrapper>} />
+            <Route path="/quem-somos" element={<PageWrapper><About /></PageWrapper>} />
+            
+            {/* Fallback */}
+            <Route path="*" element={<HomePage />} />
           </Routes>
         </main>
         <Footer />

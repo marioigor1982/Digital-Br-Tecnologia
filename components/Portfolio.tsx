@@ -26,7 +26,7 @@ const Portfolio: React.FC = () => {
     : portfolioData.filter(item => item.category === activeCategory);
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div className="max-w-xl">
@@ -62,6 +62,7 @@ const Portfolio: React.FC = () => {
                   src={item.image} 
                   alt={item.title} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
                   <span className="text-white font-bold bg-secondary/80 px-4 py-1 rounded-full text-xs">Ver Projeto</span>
