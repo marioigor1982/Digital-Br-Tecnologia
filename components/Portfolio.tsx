@@ -26,7 +26,7 @@ const Portfolio: React.FC = () => {
     : portfolioData.filter(item => item.category === activeCategory);
 
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-20 md:py-28 bg-white">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div className="max-w-xl">
