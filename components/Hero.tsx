@@ -14,6 +14,15 @@ interface HeroSlide {
 
 const slides: HeroSlide[] = [
   {
+    id: 'welcome',
+    title: 'Digital BR',
+    tagline: 'Inovação e Tecnologia',
+    description: 'Transformamos o potencial da sua marca em uma vitrine digital sofisticada, moderna e focada em resultados reais.',
+    image: 'https://i.postimg.cc/rpXfmqnN/Propaganda_2.png',
+    accent: 'bg-primary',
+    badgeText: 'Líder Digital'
+  },
+  {
     id: 'basico',
     title: 'Básico',
     tagline: 'Solução de Entrada',
@@ -55,14 +64,14 @@ const Hero: React.FC = () => {
   return (
     <section className="relative min-h-[95vh] md:min-h-screen w-full flex items-center bg-white overflow-hidden pt-20">
       {/* Elementos Decorativos de Fundo que reagem ao slide */}
-      <div className={`absolute top-0 right-0 w-1/2 h-full transition-colors duration-1000 skew-x-12 translate-x-20 z-0 ${current === 2 ? 'bg-accentGreen1/5' : 'bg-[#069DBF]/5'}`}></div>
+      <div className={`absolute top-0 right-0 w-1/2 h-full transition-colors duration-1000 skew-x-12 translate-x-20 z-0 ${current === 3 ? 'bg-accentGreen1/5' : 'bg-[#069DBF]/5'}`}></div>
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl z-0"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 min-h-[600px]">
           
           {/* Coluna de Texto (Esquerda) com Transição de Opacidade */}
-          <div className="lg:w-1/2 text-left order-2 lg:order-1 relative h-[400px] flex items-center">
+          <div className="lg:w-1/2 text-left order-2 lg:order-1 relative h-[450px] flex items-center">
             {slides.map((slide, index) => (
               <div 
                 key={slide.id}
@@ -75,10 +84,10 @@ const Hero: React.FC = () => {
                 <span className={`inline-block w-fit px-4 py-1.5 rounded-full text-white text-xs font-black uppercase tracking-[0.3em] mb-6 shadow-sm ${slide.accent}`}>
                   {slide.tagline}
                 </span>
-                <h1 className="text-6xl md:text-8xl font-black text-primary mb-6 leading-none tracking-tighter uppercase">
+                <h1 className="text-5xl md:text-8xl font-black text-primary mb-6 leading-none tracking-tighter uppercase">
                   {slide.title}
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-600 mb-10 max-w-xl leading-relaxed font-medium">
+                <p className="text-lg md:text-2xl text-gray-600 mb-10 max-w-xl leading-relaxed font-medium">
                   {slide.description}
                 </p>
                 
@@ -101,19 +110,19 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Coluna da Imagem (Direita) com Cross-Fade */}
-          <div className="lg:w-1/2 flex justify-center lg:justify-end order-1 lg:order-2 relative h-[400px] md:h-[500px] w-full">
-            <div className="relative w-full max-w-[500px] h-full">
+          <div className="lg:w-1/2 flex justify-center lg:justify-end order-1 lg:order-2 relative h-[400px] md:h-[550px] w-full">
+            <div className="relative w-full max-w-[550px] h-full">
               {slides.map((slide, index) => (
                 <div 
                   key={slide.id}
                   className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 transform ${
                     index === current 
-                    ? 'opacity-100 scale-100 rotate-0' 
-                    : 'opacity-0 scale-90 rotate-3'
+                    ? 'opacity-100 scale-100 rotate-0 translate-y-0' 
+                    : 'opacity-0 scale-90 rotate-2 translate-y-12'
                   }`}
                 >
                   {/* Brilho decorativo individual */}
-                  <div className={`absolute inset-0 blur-[80px] rounded-full transition-colors duration-1000 ${index === 2 ? 'bg-accentGreen1/20' : 'bg-secondary/20'}`}></div>
+                  <div className={`absolute inset-0 blur-[80px] rounded-full transition-colors duration-1000 ${index === 3 ? 'bg-accentGreen1/20' : 'bg-secondary/20'}`}></div>
                   
                   <img 
                     src={slide.image} 
@@ -128,7 +137,7 @@ const Hero: React.FC = () => {
                         <svg className={`w-8 h-8 ${slide.accent.replace('bg-', 'text-')}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                       </div>
                       <div>
-                        <span className="block text-[10px] font-black uppercase text-gray-400 tracking-widest">Status</span>
+                        <span className="block text-[10px] font-black uppercase text-gray-400 tracking-widest">Destaque</span>
                         <span className="block text-primary font-black text-xl leading-none">{slide.badgeText}</span>
                       </div>
                     </div>
