@@ -78,10 +78,10 @@ const Pricing: React.FC = () => {
               buttonClasses = "bg-secondary text-white hover:bg-white hover:text-primary";
               iconClasses = "text-secondary";
             } else {
-              // Estilo BÁSICO: Branco
-              cardClasses = "bg-white text-primary border border-gray-100 shadow-sm";
+              // Estilo BÁSICO: Degradê Azul Claro com Cinza Claro
+              cardClasses = "bg-gradient-to-br from-[#069DBF]/15 to-[#F2F2F2] text-primary border border-secondary/10 shadow-sm";
               textPrimaryClasses = "text-primary";
-              textSecondaryClasses = "text-gray-500";
+              textSecondaryClasses = "text-gray-600";
               buttonClasses = "bg-primary text-white hover:bg-secondary";
               iconClasses = "text-accentGreen1";
             }
@@ -125,7 +125,7 @@ const Pricing: React.FC = () => {
                   ))}
                 </ul>
 
-                <div className={`mt-auto pt-8 border-t ${plan.isPremium || plan.isPopular ? 'border-white/10' : 'border-gray-100'}`}>
+                <div className={`mt-auto pt-8 border-t ${plan.isPremium || plan.isPopular ? 'border-white/10' : 'border-gray-200'}`}>
                   <p className="text-[10px] font-bold mb-4 uppercase tracking-widest opacity-70">
                     Opcional Domínio Próprio: R$ {plan.customDomainPrice} + R$ {plan.customDomainMaint}/mês
                   </p>
