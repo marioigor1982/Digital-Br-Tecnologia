@@ -18,7 +18,7 @@ const slides: HeroSlide[] = [
     title: 'Digital BR',
     tagline: 'Inovação e Tecnologia',
     description: 'Transformamos o potencial da sua marca em uma vitrine digital sofisticada, moderna e focada em resultados reais.',
-    image: 'https://i.postimg.cc/rpXfmqnN/Propaganda_2.png',
+    image: 'https://i.postimg.cc/rp0m1XMK/DIGITAL-TRANSPARENT.png',
     accent: 'bg-primary',
     badgeText: 'Líder Digital'
   },
@@ -68,7 +68,7 @@ const Hero: React.FC = () => {
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl z-0"></div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 min-h-[600px]">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 min-h-[650px]">
           
           {/* Coluna de Texto (Esquerda) com Transição de Opacidade */}
           <div className="lg:w-1/2 text-left order-2 lg:order-1 relative h-[450px] flex items-center">
@@ -109,25 +109,25 @@ const Hero: React.FC = () => {
             ))}
           </div>
 
-          {/* Coluna da Imagem (Direita) com Cross-Fade */}
-          <div className="lg:w-1/2 flex justify-center lg:justify-end order-1 lg:order-2 relative h-[400px] md:h-[550px] w-full">
-            <div className="relative w-full max-w-[550px] h-full">
+          {/* Coluna da Imagem (Direita) com Cross-Fade e Tamanho Grande */}
+          <div className="lg:w-1/2 flex justify-center lg:justify-end order-1 lg:order-2 relative h-[450px] md:h-[650px] w-full">
+            <div className="relative w-full max-w-[650px] h-full">
               {slides.map((slide, index) => (
                 <div 
                   key={slide.id}
                   className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 transform ${
                     index === current 
                     ? 'opacity-100 scale-100 rotate-0 translate-y-0' 
-                    : 'opacity-0 scale-90 rotate-2 translate-y-12'
+                    : 'opacity-0 scale-95 rotate-2 translate-y-12'
                   }`}
                 >
                   {/* Brilho decorativo individual */}
-                  <div className={`absolute inset-0 blur-[80px] rounded-full transition-colors duration-1000 ${index === 3 ? 'bg-accentGreen1/20' : 'bg-secondary/20'}`}></div>
+                  <div className={`absolute inset-0 blur-[100px] rounded-full transition-colors duration-1000 ${index === 3 ? 'bg-accentGreen1/25' : 'bg-secondary/25'}`}></div>
                   
                   <img 
                     src={slide.image} 
                     alt={`Plano ${slide.title}`} 
-                    className="relative z-10 w-full h-full object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.15)]"
+                    className={`relative z-10 w-full h-full object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.15)] ${index === 0 ? 'scale-110' : 'scale-100'}`}
                   />
                   
                   {/* Badge Flutuante específico de cada slide */}
