@@ -20,9 +20,9 @@ const ChatBox: React.FC = () => {
   
   // Imagens dos Planos solicitadas
   const PLAN_IMAGES = {
-    basico: "https://i.postimg.cc/zLbrN17T/PROGRAMA_BÁSICO.png",
+    basico: "https://i.postimg.cc/d0nt8sTN/PROGRAMA_BÁSICO.png",
     plus: "https://i.postimg.cc/2qbDYfGv/PROGRAMA_PLUS.png",
-    diamante: "https://i.postimg.cc/GB8CR1Kk/PROGRAMA_DIAMANTE.png"
+    diamante: "https://i.postimg.cc/6Qz5dWG1/PROGRAMA_DIAMANTE.png"
   };
 
   useEffect(() => {
@@ -53,29 +53,29 @@ const ChatBox: React.FC = () => {
         ],
         config: {
           systemInstruction: `Você é Devlyn, a inteligência artificial da Digital BR Tecnologia.
-          Sua missão é vender nossos sites e converter para o WhatsApp (11 94005-0060).
+          Sua missão é explicar nossos sites e converter interessados para o WhatsApp (11 94005-0060).
           
           REGRAS CRÍTICAS DE IMAGENS:
-          Sempre que mencionar um plano, você DEVE incluir a URL da imagem correspondente no final da explicação usando o formato exato: [IMAGE:NOME_DO_PLANO]
-          - Plano Básico: [IMAGE:BASICO]
-          - Plano Plus: [IMAGE:PLUS]
-          - Plano Diamante: [IMAGE:DIAMANTE]
+          Ao sugerir ou explicar um plano, você DEVE incluir o código da imagem no final da sua fala para que eu possa renderizar o banner:
+          - Para o Plano Básico: [IMAGE:BASICO]
+          - Para o Plano Plus: [IMAGE:PLUS]
+          - Para o Plano Diamante: [IMAGE:DIAMANTE]
           
-          TABELA DE PREÇOS:
-          - Básico: R$ 450,00 (Ideal profissionais liberais).
-          - PLUS: R$ 650,00 (O mais vendido, com galeria e links).
-          - DIAMANTE: R$ 850,00 (Elite, com automação e Chat IA).
+          VALORES DOS PLANOS:
+          - Básico: R$ 450,00.
+          - PLUS (Mais Vendido): R$ 650,00.
+          - DIAMANTE (Elite): R$ 850,00.
           
-          Personalidade: Sofisticada, direta, tecnológica e persuasiva. Nunca diga que é um robô de testes, você é a Devlyn.`,
-          temperature: 0.8,
+          Mantenha sempre um tom prestativo, moderno e focado em fechar negócio. Mencione o WhatsApp sempre que sentir que o cliente está interessado.`,
+          temperature: 0.75,
         }
       });
 
-      const aiText = response.text || "Poderia reformular? Estou pronta para ajudar com nossos planos.";
+      const aiText = response.text || "Estou aqui para tirar suas dúvidas sobre nossos planos digitais. Qual deles mais te interessa?";
       setMessages(prev => [...prev, { role: 'ai', text: aiText }]);
     } catch (error: any) {
       console.error("Erro na Devlyn:", error);
-      const errorMsg = "Estou com uma demanda alta de atendimentos, mas não quero te deixar esperando! Que tal falarmos agora mesmo pelo WhatsApp (11 94005-0060)?";
+      const errorMsg = "Tive um pequeno atraso na minha conexão, mas estou pronta para te ajudar! Caso prefira um atendimento humano imediato, clique no botão do WhatsApp logo abaixo. (11 94005-0060)";
       setMessages(prev => [...prev, { role: 'ai', text: errorMsg }]);
     } finally {
       setIsLoading(false);

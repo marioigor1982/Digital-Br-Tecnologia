@@ -18,7 +18,7 @@ const plans: PricingPlan[] = [
     price: 'R$ 450,00',
     maintenance: 'R$ 29,90/mês',
     description: 'Ideal para profissionais liberais e novos negócios que precisam de uma presença digital profissional sem altos investimentos iniciais.',
-    imageUrl: 'https://i.postimg.cc/zLbrN17T/PROGRAMA_BÁSICO.png',
+    imageUrl: 'https://i.postimg.cc/d0nt8sTN/PROGRAMA_BÁSICO.png',
     features: [
       'Landing Page: Uma página única focada em conversão.',
       'Domínio Incluso: Facilidade total sem burocracia.',
@@ -45,7 +45,7 @@ const plans: PricingPlan[] = [
     price: 'R$ 850,00',
     maintenance: 'R$ 69,90/mês',
     description: 'Solução definitiva para empresas que buscam escala, automação e uma imagem corporativa impecável.',
-    imageUrl: 'https://i.postimg.cc/GB8CR1Kk/PROGRAMA_DIAMANTE.png',
+    imageUrl: 'https://i.postimg.cc/6Qz5dWG1/PROGRAMA_DIAMANTE.png',
     isPremium: true,
     features: [
       'Tudo do PLUS e mais.',

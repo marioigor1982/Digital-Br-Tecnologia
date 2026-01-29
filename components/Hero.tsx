@@ -27,7 +27,7 @@ const slides: HeroSlide[] = [
     title: 'Básico',
     tagline: 'Solução de Entrada',
     description: 'Ideal para profissionais liberais e novos negócios que precisam de uma presença digital profissional sem altos investimentos iniciais.',
-    image: 'https://i.postimg.cc/zLbrN17T/PROGRAMA_BÁSICO.png',
+    image: 'https://i.postimg.cc/d0nt8sTN/PROGRAMA_BÁSICO.png',
     accent: 'bg-secondary',
     badgeText: '72 Horas'
   },
@@ -45,7 +45,7 @@ const slides: HeroSlide[] = [
     title: 'Diamante',
     tagline: 'Elite e Automação',
     description: 'A solução definitiva para empresas que buscam escala, automação de atendimento e uma imagem corporativa impecável.',
-    image: 'https://i.postimg.cc/GB8CR1Kk/PROGRAMA_DIAMANTE.png',
+    image: 'https://i.postimg.cc/6Qz5dWG1/PROGRAMA_DIAMANTE.png',
     accent: 'bg-accentGreen1',
     badgeText: 'IA Ativa'
   }
