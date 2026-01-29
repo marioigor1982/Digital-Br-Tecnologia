@@ -10,7 +10,7 @@ interface Message {
 const ChatBox: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'ai', text: 'Olá! Eu sou a Devlyn, sua assistente virtual da Digital BR. Como posso ajudar a impulsionar seu negócio hoje?' }
+    { role: 'ai', text: 'Olá! Eu sou a Devlyn, sua assistente virtual da Digital BR Tecnologia. Como posso ajudar a transformar sua presença digital hoje?' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -33,27 +33,73 @@ const ChatBox: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Inicialização dentro da função conforme diretrizes para garantir captura da API_KEY
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      const response = await ai.models.generateContent({
+      
+      // Construindo o histórico para a API de Chat
+      // Nota: Gemini prefere que o histórico comece com 'user' ou alterne corretamente.
+      // Como nossa primeira mensagem é da IA, vamos tratá-la como saudação inicial e 
+      // focar o contexto no histórico de conversas reais.
+      const history = messages
+        .filter((_, idx) => idx > 0) // Ignora a primeira mensagem estática de boas-vindas para o histórico de chat
+        .map(m => ({
+          role: m.role === 'ai' ? 'model' : 'user',
+          parts: [{ text: m.text }]
+        }));
+
+      const chat = ai.chats.create({
         model: 'gemini-3-flash-preview',
-        contents: [
-          ...messages.map(m => ({ 
-            role: m.role === 'ai' ? 'model' : 'user', 
-            parts: [{ text: m.text }] 
-          })), 
-          { role: 'user', parts: [{ text: userMsg }] }
-        ],
         config: {
-          systemInstruction: "Você é Devlyn, a assistente de IA da Digital BR Tecnologia. Sua função é ser cordial, profissional e técnica. Seu estilo de fala é sofisticado e focado em converter o interesse do cliente em um contato via WhatsApp. Planos: Básico R$ 450, PLUS R$ 650 (mais popular), DIAMANTE R$ 850.",
+          systemInstruction: `Você é Devlyn, a inteligência artificial proprietária da Digital BR Tecnologia. 
+          Sua personalidade é extremamente sofisticada, prestativa, tecnológica e comercialmente astuta.
+          
+          OBJETIVOS:
+          1. Encantar o cliente com conhecimento técnico sobre presença digital.
+          2. Explicar nossos planos de forma clara:
+             - Básico (R$ 450): Foco em profissionais liberais, Landing Page responsiva, domínio incluso.
+             - PLUS (R$ 650): O MAIS POPULAR. Ideal para expansão, com galeria de fotos, vídeos e links integrados.
+             - DIAMANTE (R$ 850): ELITE. Automação total, Chat de IA (como você!), e-mails corporativos e suporte prioritário.
+          3. SEMPRE buscar converter a conversa em um contato humano via WhatsApp (11 94005-0060).
+          
+          REGRAS DE CONDUTA:
+          - Use um tom profissional mas acolhedor.
+          - Não invente preços ou serviços que não estão listados.
+          - Se o cliente perguntar algo muito complexo, sugira falar com nossos especialistas.
+          - Mencione que a Digital BR democratiza a tecnologia para o pequeno comércio.`,
         }
       });
 
-      const aiText = response.text || "Desculpe, tive um pequeno problema técnico. Poderia repetir?";
+      // Se houver histórico, poderíamos enviá-lo aqui, mas para simplicidade e 
+      // inteligência mantendo o contexto via sendMessage, vamos processar a última mensagem.
+      // Nota: Para manter o contexto total em cada chamada sem gerenciar estado de 'chat' persistente:
+      const response = await ai.models.generateContent({
+        model: 'gemini-3-flash-preview',
+        contents: [
+          ...messages.map(m => ({
+            role: m.role === 'ai' ? 'model' : 'user',
+            parts: [{ text: m.text }]
+          })),
+          { role: 'user', parts: [{ text: userMsg }] }
+        ],
+        config: {
+          systemInstruction: `Você é Devlyn da Digital BR Tecnologia. Sofisticada e focada em conversão. Planos: Básico 450, PLUS 650, DIAMANTE 850. Contato: (11) 94005-0060.`,
+          temperature: 0.7,
+          topP: 0.95,
+        }
+      });
+
+      const aiText = response.text || "Estou processando sua solicitação com cuidado. Poderia me dar mais detalhes?";
       setMessages(prev => [...prev, { role: 'ai', text: aiText }]);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erro na Devlyn:", error);
-      setMessages(prev => [...prev, { role: 'ai', text: "No momento estou processando muitas requisições. Que tal falarmos diretamente pelo WhatsApp? Clique no botão abaixo!" }]);
+      
+      // Tratamento de erro mais "inteligente" e menos robótico
+      let errorResponse = "Tive uma oscilação momentânea na minha rede neural, mas estou aqui! Que tal continuarmos essa conversa de forma mais personalizada com nossos consultores no WhatsApp?";
+      
+      if (error?.message?.includes('429')) {
+        errorResponse = "Nossa demanda está altíssima devido ao sucesso de nossos planos! Para não te deixar esperando, que tal clicar no botão do WhatsApp abaixo? Te atenderemos instantaneamente por lá.";
+      }
+      
+      setMessages(prev => [...prev, { role: 'ai', text: errorResponse }]);
     } finally {
       setIsLoading(false);
     }
@@ -61,7 +107,7 @@ const ChatBox: React.FC = () => {
 
   const openWhatsApp = () => {
     const summary = messages.map(m => `${m.role === 'user' ? 'Cliente' : 'Devlyn'}: ${m.text}`).join('\n');
-    const encodedMsg = encodeURIComponent(`Olá, vim do chat com a Devlyn. Resumo da conversa:\n\n${summary}`);
+    const encodedMsg = encodeURIComponent(`Olá, vim do chat com a Devlyn. Gostaria de saber mais sobre as soluções da Digital BR.\n\nResumo do chat:\n${summary.substring(0, 500)}...`);
     window.open(`https://wa.me/5511940050060?text=${encodedMsg}`, '_blank');
   };
 
@@ -115,12 +161,10 @@ const ChatBox: React.FC = () => {
                 )}
                 
                 {m.role === 'ai' ? (
-                  /* Estilo Devlyn: Gradiente Footer + Transparência + Texto Branco */
-                  <div className="max-w-[85%] p-4 rounded-2xl text-[13px] shadow-md leading-relaxed bg-gradient-to-br from-[#074073]/95 via-[#069DBF]/90 to-[#56A632]/85 backdrop-blur-sm text-white rounded-bl-none font-medium border border-white/10">
+                  <div className="max-w-[85%] p-4 rounded-2xl text-[13px] shadow-md leading-relaxed bg-gradient-to-br from-[#074073]/95 via-[#069DBF]/90 to-[#56A632]/85 backdrop-blur-sm text-white rounded-bl-none font-medium border border-white/10 whitespace-pre-wrap">
                     {m.text}
                   </div>
                 ) : (
-                  /* Estilo Cliente: Fundo Gelo/Degradê Branco + Borda Degradê Azul/Verde */
                   <div className="max-w-[85%] p-[1.5px] rounded-2xl bg-gradient-to-r from-[#074073] via-[#069DBF] to-[#56A632] shadow-sm rounded-br-none">
                     <div className="bg-gradient-to-br from-[#F2F2F2] to-white text-primary p-4 rounded-[calc(1rem-1.5px)] rounded-br-none text-[13px] leading-relaxed font-bold border border-white/40">
                       {m.text}
