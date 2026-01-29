@@ -21,7 +21,7 @@ const ChatBox: React.FC = () => {
   // Imagens dos Planos solicitadas
   const PLAN_IMAGES = {
     basico: "https://i.postimg.cc/d0nt8sTN/PROGRAMA_BÁSICO.png",
-    plus: "https://i.postimg.cc/2qbDYfGv/PROGRAMA_PLUS.png",
+    plus: "https://i.postimg.cc/Dz5yqvbC/PROGRAMA_PLUS.png",
     diamante: "https://i.postimg.cc/6Qz5dWG1/PROGRAMA_DIAMANTE.png"
   };
 

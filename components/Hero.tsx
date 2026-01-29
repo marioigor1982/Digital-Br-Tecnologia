@@ -36,7 +36,7 @@ const slides: HeroSlide[] = [
     title: 'Plus',
     tagline: 'Expansão e Engajamento',
     description: 'Perfeito para empresas que já possuem um fluxo de clientes e precisam demonstrar autoridade e variedade de produtos/serviços.',
-    image: 'https://i.postimg.cc/2qbDYfGv/PROGRAMA_PLUS.png',
+    image: 'https://i.postimg.cc/Dz5yqvbC/PROGRAMA_PLUS.png',
     accent: 'bg-primary',
     badgeText: 'Destaque'
   },

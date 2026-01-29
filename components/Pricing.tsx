@@ -31,7 +31,7 @@ const plans: PricingPlan[] = [
     price: 'R$ 650,00',
     maintenance: 'R$ 49,90/mês',
     description: 'Perfeito para empresas que já possuem um fluxo de clientes e precisam demonstrar autoridade e variedade.',
-    imageUrl: 'https://i.postimg.cc/2qbDYfGv/PROGRAMA_PLUS.png',
+    imageUrl: 'https://i.postimg.cc/Dz5yqvbC/PROGRAMA_PLUS.png',
     isPopular: true,
     features: [
       'Site com Links: Navegação completa e estruturada.',
