@@ -34,7 +34,7 @@ const Header: React.FC = () => {
             alt="Digital BR Tecnologia" 
             className="w-12 h-12 rounded-full border-2 border-primary object-cover"
           />
-          <span className={`font-bold text-xl hidden sm:block ${isScrolled || !isHome ? 'text-primary' : 'text-white'}`}>
+          <span className="font-bold text-xl hidden sm:block text-primary">
             Digital BR
           </span>
         </Link>
@@ -46,9 +46,7 @@ const Header: React.FC = () => {
               key={link.name} 
               to={link.href}
               className={`font-medium transition-colors hover:text-secondary ${
-                (isScrolled || !isHome) 
-                ? (location.pathname === link.href ? 'text-secondary' : 'text-primary') 
-                : 'text-white'
+                location.pathname === link.href ? 'text-secondary' : 'text-primary'
               }`}
             >
               {link.name}
@@ -62,14 +60,14 @@ const Header: React.FC = () => {
             href="https://www.instagram.com/digital.brtecnologia/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className={`transition-transform hover:scale-110 ${isScrolled || !isHome ? 'text-primary' : 'text-white'}`}
+            className="transition-transform hover:scale-110 text-primary"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
           </a>
 
           {/* Mobile Toggle */}
           <button 
-            className={`md:hidden p-2 rounded-lg ${isScrolled || !isHome ? 'text-primary' : 'text-white'}`}
+            className="md:hidden p-2 rounded-lg text-primary"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
